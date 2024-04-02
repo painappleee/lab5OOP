@@ -1,7 +1,6 @@
 package Lab5.Controller;
 
-import Lab5.Model.Clinic;
-import Lab5.View.Autorization;
+import Lab5.View.Authorization;
 
 public class Main {
     /*                 Доктора
@@ -13,6 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new Controller();
+        new Repository("Поликлинника №11");
+        new Authorization();
     }
 }

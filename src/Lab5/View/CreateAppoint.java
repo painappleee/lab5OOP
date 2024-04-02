@@ -1,6 +1,6 @@
 package Lab5.View;
 
-import Lab5.Controller.Controller;
+import Lab5.Controller.Repository;
 import Lab5.Model.*;
 
 import javax.swing.*;
@@ -8,67 +8,91 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class CreateAppoint extends JFrame {
-    public CreateAppoint(JFrame personalArea, Patient patient, Doctor doctor){
-        super("Запись на приём");
-        setSize(300, 220);
-        Controller.baseForm(this);
-
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                personalArea.setVisible(true);
-            }
-        });
-
-
+public class CreateAppoint extends BaseForm{
+    private JPanel appointsPanel;
+    private JLabel appoints;
+    private JPanel datePanel;
+    private JLabel dateLabel;
+    private JTextField date;
+    private JPanel timePanel;
+    private JLabel timeLabel;
+    private JTextField time;
+    private JPanel createPanel;
+    private JButton create;
+    public CreateAppoint(JFrame lastForm, Patient patient, Doctor doctor){
+        super(new Dimension(300,220), "Запись на приём");
+        createComponents();
+        setSizes();
+        setAlignments();
+        setFonts();
+        setComponents();
+        addListeners(lastForm,patient,doctor);
+    }
+    private void createComponents(){
+        appointsPanel = new JPanel();
+        appoints =      new JLabel("Запись на приём");
+        datePanel =     new JPanel();
+        dateLabel =     new JLabel("Дата: ");
+        date =          new JTextField(10);
+        timePanel =     new JPanel();
+        timeLabel =     new JLabel("Время: ");
+        time =          new JTextField(10);
+        createPanel =   new JPanel();
+        create =        new JButton("Запиcаться");
+    }
+    private void setSizes(){
+        appointsPanel.setMaximumSize(new Dimension(300, 40));
+    }
+    private void setAlignments(){
+        appoints.setAlignmentX(CENTER_ALIGNMENT);
+        create.setAlignmentX(CENTER_ALIGNMENT);
+    }
+    private void setFonts(){
+        appoints.setFont(new Font("Arial", Font.PLAIN, 23));
+        dateLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        date.setFont(new Font("Arial", Font.PLAIN, 18));
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        time.setFont(new Font("Arial", Font.PLAIN, 18));
+        create.setFont(new Font("Arial", Font.PLAIN, 20));
+    }
+    private void setComponents(){
         add(Box.createVerticalStrut(5));
 
-        JPanel appointsPanel = new JPanel();
-        JLabel appoints = new JLabel("Запись на приём");
-        appointsPanel.setMaximumSize(new Dimension(300, 40));
-        appoints.setFont(new Font("Arial", Font.PLAIN, 23));
-        appoints.setAlignmentX(CENTER_ALIGNMENT);
         appointsPanel.add(appoints);
         add(appointsPanel);
 
-        JPanel datePanel = new JPanel();
-        JLabel dateLabel = new JLabel("Дата: ");
-        dateLabel.setFont(new Font("Arial", Font.BOLD, 18));
         datePanel.add(dateLabel);
-        JTextField date = new JTextField(10);
-        date.setFont(new Font("Arial", Font.PLAIN, 18));
         datePanel.add(date);
         add(datePanel);
 
-        JPanel timePanel = new JPanel();
-        JLabel timeLabel = new JLabel("Время: ");
-        timeLabel.setFont(new Font("Arial", Font.BOLD, 18));
         timePanel.add(timeLabel);
-        JTextField time = new JTextField(10);
-        time.setFont(new Font("Arial", Font.PLAIN, 18));
         timePanel.add(time);
         add(timePanel);
 
-
-        JPanel createPanel = new JPanel();
-        JButton create = new JButton("Запиcаться");
-        create.setAlignmentX(CENTER_ALIGNMENT);
-        create.setFont(new Font("Arial", Font.PLAIN, 20));
         createPanel.add(create);
         add(create);
 
         add(Box.createVerticalStrut(10));
-
+    }
+    private void addListeners(JFrame lastForm, Patient patient, Doctor doctor){
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                lastForm.setVisible(true);
+                lastForm.setEnabled(true);
+            }
+        });
         create.addActionListener(e -> {
             Appointment newApp;
             if (doctor instanceof Clinician)
                 newApp = new AppointmentOfClinician(doctor,patient, date.getText(),time.getText());
             else
                 newApp = new AppointmentOfDiagnostican(doctor,patient, date.getText(),time.getText());
-            Controller.clinic.getAppointments().add(newApp);
+            Repository.getAppointments().add(newApp);
+
             this.dispose();
+            lastForm.setEnabled(true);
         });
     }
+
 }

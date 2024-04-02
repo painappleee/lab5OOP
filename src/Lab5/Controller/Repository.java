@@ -1,26 +1,23 @@
 package Lab5.Controller;
 
 import Lab5.Model.*;
-import Lab5.View.Autorization;
 
-import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Controller {
-    public static Clinic clinic = new Clinic("Поликлиника №11");
-
-    public Controller() {
+public class Repository {
+    private static Clinic clinic;
+    public Repository(String clinicName) {
+        clinic = new Clinic(clinicName);
+        clinic.setClinicName(clinicName);
         clinic.iniDoctors();
         clinic.iniPatients();
         clinic.iniAppointments();
-
-        new Autorization();
     }
-
-    public static Person autorization(int type, String login, String password) {
+    public static Person getPerson(int type, String login, String password) {
         Person currentPerson = null;
         if (type == 1) {
-            for (Doctor x : Controller.clinic.getDoctors()) {
+            for (Doctor x : Repository.clinic.getDoctors()) {
                 if (x.getFullName().equals(login) && (x.getPassword().equals(password))) {
                     currentPerson = x;
                     break;
@@ -28,7 +25,7 @@ public class Controller {
             }
         }
         else if (type == 2) {
-            for (Patient x : Controller.clinic.getPatients()) {
+            for (Patient x : Repository.clinic.getPatients()) {
                 if (x.getFullName().equals(login) && (x.getPassword().equals(password))) {
                     currentPerson = x;
                     break;
@@ -37,11 +34,10 @@ public class Controller {
         }
         return currentPerson;
     }
-
-    public static String[] getComboboxItem(boolean isClinincan){
+    public static String[] getDoctorProf(boolean isClinician){
         HashSet<String> doctorProf = new HashSet<>();
-        for (Doctor doctor : Controller.clinic.getDoctors()){
-            if (isClinincan){
+        for (Doctor doctor : Repository.clinic.getDoctors()){
+            if (isClinician){
                 if (doctor instanceof Clinician)
                     doctorProf.add(doctor.getProfession());
             }
@@ -50,19 +46,13 @@ public class Controller {
                     doctorProf.add(doctor.getProfession());
             }
         }
-
-
         return doctorProf.toArray(new String[]{});
     }
-
-    public static void baseForm(JFrame frame){
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon("src/Lab5/images/icon.png");
-        frame.setIconImage(icon.getImage());
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+    public static String getClinicName() {
+        return clinic.getClinicName();
     }
+    public static ArrayList<Appointment> getAppointments(){return clinic.getAppointments();};
+    public static ArrayList<Doctor> getDoctors(){return clinic.getDoctors();};
 }
 
 

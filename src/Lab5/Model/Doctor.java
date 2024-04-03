@@ -8,16 +8,11 @@ public abstract class Doctor extends Person{
     public Doctor(String fullName, String password) {
         super(fullName, password);
     }
-
-
     public abstract void admitPatient(Appointment appointment, ArrayList<String> writeToAppointment);
-
     public void setProfession(String profession) {
         this.profession = profession;
     }
     public String getProfession() {
         return profession;
     }
-
-
 }

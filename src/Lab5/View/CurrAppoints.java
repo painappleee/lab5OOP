@@ -1,6 +1,6 @@
 package Lab5.View;
 
-import Lab5.Controller.Repository;
+import Lab5.Repository.Repository;
 import Lab5.Model.Appointment;
 import Lab5.Model.Doctor;
 import Lab5.Model.Person;
@@ -85,5 +85,4 @@ public class CurrAppoints extends BaseForm{
             }
         }
     }
-
 }

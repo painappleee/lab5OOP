@@ -1,6 +1,6 @@
 package Lab5.View;
 
-import Lab5.Controller.Repository;
+import Lab5.Repository.Repository;
 import Lab5.Model.Appointment;
 
 import javax.swing.*;
@@ -18,6 +18,7 @@ public class DeleteAppoint extends BaseForm {
     private JLabel time;
     private JPanel delPanel;
     private JButton del;
+    private JLabel warning;
     public DeleteAppoint(JFrame lastForm, Appointment currAppoint){
         super(new Dimension(300, 220),"Удаление записей" );
         createComponents(currAppoint);
@@ -90,5 +91,4 @@ public class DeleteAppoint extends BaseForm {
             lastForm.setEnabled(true);
         });
     }
-
 }

@@ -1,5 +1,6 @@
-package Lab5.Controller;
+package Lab5;
 
+import Lab5.Repository.Repository;
 import Lab5.View.Authorization;
 
 public class Main {

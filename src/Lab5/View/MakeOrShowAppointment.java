@@ -1,6 +1,6 @@
 package Lab5.View;
 
-import Lab5.Controller.Repository;
+import Lab5.Repository.Repository;
 import Lab5.Model.*;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class MakeOrShowAppointment extends BaseForm {
     private JPanel doctorProfComboBoxPanel;
     private JPanel buttonsPanel;
     private JPanel buttons;
-    private JComboBox<String> comboBox;
+    private JComboBox<String> doctorProfComboBox;
     public MakeOrShowAppointment(JFrame lastFrame, Person person, boolean isMake){
         super(new Dimension(600, 600),isMake ? "Запись на приём" : "Просмотр приёмов");
         createComponents(isMake);
@@ -29,7 +29,6 @@ public class MakeOrShowAppointment extends BaseForm {
         setComponents();
         addListeners(lastFrame,person,isMake);
     }
-
     private void createComponents(boolean isMake){
         appointsPanel =            new JPanel();
         appoints =                 new JLabel(isMake ? "Запись на приём" : "Просмотр приёмов");
@@ -40,31 +39,31 @@ public class MakeOrShowAppointment extends BaseForm {
         doctorProfComboBoxPanel =  new JPanel();
         buttonsPanel =             new JPanel();
         buttons =                  new JPanel();
-        comboBox =                 new JComboBox<>(Repository.getDoctorProf(clinicianRadioButton.isSelected()));
+        doctorProfComboBox =                 new JComboBox<>(Repository.getDoctorProf(clinicianRadioButton.isSelected()));
     }
     private void setSizes(boolean isMake) {
         appointsPanel.setMaximumSize(new Dimension(500,45));
         radioPanel.setMaximumSize(new Dimension(600,35));
         if (isMake)
-            comboBox.setPreferredSize(new Dimension(320,30));
+            doctorProfComboBox.setPreferredSize(new Dimension(320,30));
         else
-            comboBox.setPreferredSize(new Dimension(420,30));
+            doctorProfComboBox.setPreferredSize(new Dimension(420,30));
         doctorProfComboBoxPanel.setMaximumSize(new Dimension(500, 60));
     }
     private void setLayouts(){
         buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         buttons.setLayout(new GridLayout(0, 1,0,10));
     }
+    private void setAlignments(){
+        appoints.setAlignmentX(CENTER_ALIGNMENT);
+        doctorProfComboBox.setAlignmentX(LEFT_ALIGNMENT);
+    }
     private void setFonts() {
         appoints.setFont(new Font("Arial", Font.PLAIN, 35));
         clinicianRadioButton.setFont(new Font("Arial", Font.PLAIN, 20));
         diagnosticianRadioButton.setFont(new Font("Arial", Font.PLAIN, 20));
-        comboBox.setFont(new Font("Arial", Font.PLAIN, 18));
+        doctorProfComboBox.setFont(new Font("Arial", Font.PLAIN, 18));
 
-    }
-    private void setAlignments(){
-        appoints.setAlignmentX(CENTER_ALIGNMENT);
-        comboBox.setAlignmentX(LEFT_ALIGNMENT);
     }
     public void setComponents(){
         add(Box.createVerticalStrut(9));
@@ -85,8 +84,8 @@ public class MakeOrShowAppointment extends BaseForm {
 
         add(Box.createVerticalStrut(7));
 
-        comboBox.setSelectedIndex(0);
-        doctorProfComboBoxPanel.add(comboBox);
+        doctorProfComboBox.setSelectedIndex(0);
+        doctorProfComboBoxPanel.add(doctorProfComboBox);
         add(doctorProfComboBoxPanel);
 
         add(buttonsPanel);
@@ -98,7 +97,7 @@ public class MakeOrShowAppointment extends BaseForm {
                 lastFrame.setVisible(true);
             }
         });
-        comboBox.addItemListener(e -> {
+        doctorProfComboBox.addItemListener(e -> {
             buttons.removeAll();
             if (isMake){
                 createMakeButtons(person);
@@ -110,14 +109,14 @@ public class MakeOrShowAppointment extends BaseForm {
             revalidate();
         });
         clinicianRadioButton.addChangeListener(e -> {
-            comboBox.removeAllItems();
+            doctorProfComboBox.removeAllItems();
             for (String x : Repository.getDoctorProf(clinicianRadioButton.isSelected()))
-                comboBox.addItem(x);
+                doctorProfComboBox.addItem(x);
         });
     }
     private void createMakeButtons(Person person){
         for (Doctor x : Repository.getDoctors()) {
-            if (comboBox.getSelectedItem() == x.getProfession()) {
+            if (doctorProfComboBox.getSelectedItem() == x.getProfession()) {
                 JButton doctorButton = new JButton(x.getFullName());
                 doctorButton.setPreferredSize(new Dimension(320, 50));
                 doctorButton.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -132,7 +131,7 @@ public class MakeOrShowAppointment extends BaseForm {
     private void createShowButtons(Person person) {
         for (Appointment x : Repository.getAppointments()) {
             if (x.getPatient().getFullName().equals(person.getFullName()) && x.getComplite()) {
-                if (comboBox.getSelectedItem() == x.getDoctor().getProfession()) {
+                if (doctorProfComboBox.getSelectedItem() == x.getDoctor().getProfession()) {
                     JButton appButton = new JButton(x.getDoctor().getFullName() + ", " + x.getDate());
                     appButton.setPreferredSize(new Dimension(420, 50));
                     appButton.setFont(new Font("Arial", Font.PLAIN, 17));

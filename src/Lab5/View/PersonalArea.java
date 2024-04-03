@@ -1,9 +1,7 @@
 package Lab5.View;
 
-import Lab5.Controller.Repository;
 import Lab5.Model.Patient;
 import Lab5.Model.Person;
-import sun.java2d.d3d.D3DGraphicsConfig;
 
 import javax.swing.*;
 import java.awt.*;

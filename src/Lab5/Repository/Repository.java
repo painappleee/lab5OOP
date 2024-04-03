@@ -1,4 +1,4 @@
-package Lab5.Controller;
+package Lab5.Repository;
 
 import Lab5.Model.*;
 

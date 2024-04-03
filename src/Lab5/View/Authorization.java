@@ -1,5 +1,5 @@
 package Lab5.View;
-import Lab5.Controller.Repository;
+import Lab5.Repository.Repository;
 import Lab5.Model.Person;
 
 import java.awt.*;
@@ -27,7 +27,7 @@ public class Authorization extends BaseForm {
         setFonts();
         setAlignments();
         setComponents();
-        setListeners();
+        addListeners();
         revalidate();
     }
     private void createComponents(){
@@ -48,6 +48,11 @@ public class Authorization extends BaseForm {
         warningPanel =       new JPanel();
         warning =            new JLabel("     ");
     }
+    private void setAlignments(){
+        authorization.setAlignmentX(CENTER_ALIGNMENT);
+        warningPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        enter.setAlignmentX(CENTER_ALIGNMENT);
+    }
     private void setFonts(){
         authorization.setFont(new Font("Arial", Font.PLAIN, 38));
         doctorRadioButton.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -59,11 +64,6 @@ public class Authorization extends BaseForm {
         warning.setFont(new Font("Arial", Font.BOLD, 18));
         warning.setForeground(Color.red);
         enter.setFont(new Font("Arial", Font.PLAIN, 25));
-    }
-    private void setAlignments(){
-        authorization.setAlignmentX(CENTER_ALIGNMENT);
-        warningPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        enter.setAlignmentX(CENTER_ALIGNMENT);
     }
     private void setComponents(){
         add(Box.createHorizontalStrut(7));
@@ -99,7 +99,7 @@ public class Authorization extends BaseForm {
 
         add(Box.createVerticalStrut(60));
     }
-    private void setListeners(){
+    private void addListeners(){
         enter.addActionListener(e -> {
             warning.setText("    ");
             int type;

@@ -9,7 +9,6 @@ public class Clinic {
         setClinicName(clinicName);
     }
 
-
     private ArrayList<Doctor> doctors = new ArrayList<>();
     private ArrayList<Patient> patients = new ArrayList<>();
     private ArrayList<Appointment> appointments = new ArrayList<>();

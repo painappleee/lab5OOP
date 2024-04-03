@@ -1,6 +1,6 @@
 package Lab5.View;
 
-import Lab5.Controller.Repository;
+import Lab5.Repository.Repository;
 import Lab5.Model.*;
 
 import javax.swing.*;
@@ -17,10 +17,13 @@ public class CreateAppoint extends BaseForm{
     private JPanel timePanel;
     private JLabel timeLabel;
     private JTextField time;
+    private JPanel warningPanel;
+    private JLabel warning;
     private JPanel createPanel;
     private JButton create;
+
     public CreateAppoint(JFrame lastForm, Patient patient, Doctor doctor){
-        super(new Dimension(300,220), "Запись на приём");
+        super(new Dimension(300,230), "Запись на приём");
         createComponents();
         setSizes();
         setAlignments();
@@ -39,6 +42,8 @@ public class CreateAppoint extends BaseForm{
         time =          new JTextField(10);
         createPanel =   new JPanel();
         create =        new JButton("Запиcаться");
+        warningPanel =  new JPanel();
+        warning =       new JLabel("   ");
     }
     private void setSizes(){
         appointsPanel.setMaximumSize(new Dimension(300, 40));
@@ -54,6 +59,8 @@ public class CreateAppoint extends BaseForm{
         timeLabel.setFont(new Font("Arial", Font.BOLD, 18));
         time.setFont(new Font("Arial", Font.PLAIN, 18));
         create.setFont(new Font("Arial", Font.PLAIN, 20));
+        warning.setFont(new Font("Arial", Font.BOLD, 15));
+        warning.setForeground(Color.red);
     }
     private void setComponents(){
         add(Box.createVerticalStrut(5));
@@ -69,6 +76,9 @@ public class CreateAppoint extends BaseForm{
         timePanel.add(time);
         add(timePanel);
 
+        warningPanel.add(warning);
+        add(warningPanel);
+
         createPanel.add(create);
         add(create);
 
@@ -83,16 +93,21 @@ public class CreateAppoint extends BaseForm{
             }
         });
         create.addActionListener(e -> {
-            Appointment newApp;
-            if (doctor instanceof Clinician)
-                newApp = new AppointmentOfClinician(doctor,patient, date.getText(),time.getText());
-            else
-                newApp = new AppointmentOfDiagnostican(doctor,patient, date.getText(),time.getText());
-            Repository.getAppointments().add(newApp);
+            if (!(date.getText().isEmpty()) && !(time.getText().isEmpty())){
+                Appointment newApp;
+                if (doctor instanceof Clinician)
+                    newApp = new AppointmentOfClinician(doctor,patient, date.getText(),time.getText());
+                else
+                    newApp = new AppointmentOfDiagnostican(doctor,patient, date.getText(),time.getText());
+                Repository.getAppointments().add(newApp);
 
-            this.dispose();
-            lastForm.setEnabled(true);
+                this.dispose();
+                lastForm.setEnabled(true);
+            }
+            else {
+                warning.setText("Не все поля заполнены!");
+            }
+
         });
     }
-
 }

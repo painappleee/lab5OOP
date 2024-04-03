@@ -1,7 +1,6 @@
 package Lab5.Model;
 public class Patient extends Person{
     private int yearOfBirth;
-
     public Patient(String fullname,Integer yearOfBirth, String password){
         super(fullname, password);
         this.yearOfBirth = yearOfBirth;

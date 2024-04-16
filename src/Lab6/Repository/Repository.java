@@ -1,6 +1,6 @@
-package Lab5.Repository;
+package Lab6.Repository;
 
-import Lab5.Model.*;
+import Lab6.Model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,9 +10,10 @@ public class Repository {
     public Repository(String clinicName) {
         clinic = new Clinic(clinicName);
         clinic.setClinicName(clinicName);
-        clinic.iniDoctors();
-        clinic.iniPatients();
-        clinic.iniAppointments();
+        new DataBaseWorker();
+        clinic.setDoctors(DataBaseWorker.selectDoctors());
+        clinic.setPatients(DataBaseWorker.selectPatients());
+        clinic.setAppointments(DataBaseWorker.selectAppointments());
     }
     public static Person getPerson(int type, String login, String password) {
         Person currentPerson = null;
@@ -51,8 +52,25 @@ public class Repository {
     public static String getClinicName() {
         return clinic.getClinicName();
     }
-    public static ArrayList<Appointment> getAppointments(){return clinic.getAppointments();};
-    public static ArrayList<Doctor> getDoctors(){return clinic.getDoctors();};
+    public static ArrayList<Appointment> getAppointments(){return clinic.getAppointments();}
+    public static ArrayList<Doctor> getDoctors(){return clinic.getDoctors();}
+    public static ArrayList<Patient> getPatients(){return clinic.getPatients();}
+    public static void insertAppointment(Appointment appointment){
+        getAppointments().add(appointment);
+        DataBaseWorker.insertAppointment(appointment);
+    }
+    public static void deleteAppointment(Appointment appointment){
+        getAppointments().remove(appointment);
+        DataBaseWorker.deleteAppointent(appointment.getId());
+    }
+    public static void updateAppointment(Appointment appointment){
+        DataBaseWorker.updateAppointment(appointment);
+    }
+    public static void closeConn(){
+        DataBaseWorker.delConn();
+    }
+
+
 }
 
 

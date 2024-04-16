@@ -1,4 +1,4 @@
-package Lab5.Model;
+package Lab6.Model;
 public class AppointmentOfClinician extends Appointment {
     public AppointmentOfClinician(Doctor doctor, Patient patient, String date, String time){
         this.setDoctor(doctor);
@@ -7,10 +7,14 @@ public class AppointmentOfClinician extends Appointment {
         this.setTime(time);
         this.setComplite(false);
     }
+    public AppointmentOfClinician(){
+
+    }
     private String complaints;
     private String examines;
     private String diagnosis;
     private String treatment;
+
     public void setComplaints(String complaints) {
         this.complaints = complaints;
     }

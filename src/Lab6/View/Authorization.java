@@ -1,8 +1,10 @@
-package Lab5.View;
-import Lab5.Repository.Repository;
-import Lab5.Model.Person;
+package Lab6.View;
+import Lab6.Repository.Repository;
+import Lab6.Model.Person;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 public class Authorization extends BaseForm {
     private JPanel authorizationPanel;
@@ -119,5 +121,15 @@ public class Authorization extends BaseForm {
                 warning.setText("Неверный логин или пароль");
 
         });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                Repository.closeConn();
+                dispose();
+            }
+        });
+
+
     }
 }

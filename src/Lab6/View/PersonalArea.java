@@ -1,7 +1,7 @@
-package Lab5.View;
+package Lab6.View;
 
-import Lab5.Model.Patient;
-import Lab5.Model.Person;
+import Lab6.Model.Patient;
+import Lab6.Model.Person;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +34,7 @@ public class PersonalArea extends BaseForm {
     private void createComponents(Person currPerson){
         peoplePanel =         new JPanel();
         imagePanel =          new JPanel();
-        ImageIcon imageIcon = new ImageIcon("src/Lab5/images/image2.png");
+        ImageIcon imageIcon = new ImageIcon("src/Lab6/images/image2.png");
         imageLabel =          new JLabel(imageIcon);
         String[] fio =        currPerson.getFullName().split(" ");
         fioPanel =            new JPanel();

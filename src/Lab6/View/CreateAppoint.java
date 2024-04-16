@@ -1,7 +1,7 @@
-package Lab5.View;
+package Lab6.View;
 
-import Lab5.Repository.Repository;
-import Lab5.Model.*;
+import Lab6.Repository.Repository;
+import Lab6.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,7 +99,8 @@ public class CreateAppoint extends BaseForm{
                     newApp = new AppointmentOfClinician(doctor,patient, date.getText(),time.getText());
                 else
                     newApp = new AppointmentOfDiagnostican(doctor,patient, date.getText(),time.getText());
-                Repository.getAppointments().add(newApp);
+
+                Repository.insertAppointment(newApp);
 
                 this.dispose();
                 lastForm.setEnabled(true);

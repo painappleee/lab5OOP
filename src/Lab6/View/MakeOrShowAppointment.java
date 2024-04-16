@@ -1,7 +1,7 @@
-package Lab5.View;
+package Lab6.View;
 
-import Lab5.Repository.Repository;
-import Lab5.Model.*;
+import Lab6.Repository.Repository;
+import Lab6.Model.*;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,5 +1,6 @@
-package Lab5.Model;
+package Lab6.Model;
 public abstract class Appointment {
+    private int id;
     private Doctor doctor;
     private Patient patient;
     private String date;
@@ -33,5 +34,11 @@ public abstract class Appointment {
     }
     public String getTime() {
         return time;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,12 +1,7 @@
-package Lab5.Model;
+package Lab6.Model;
 import java.util.ArrayList;
 
 public class Clinician extends Doctor {
-    public Clinician(String fullName, String profession, ArrayList<String> canExamine, String password){
-        super(fullName,password);
-        this.setProfession(profession);
-        this.setCanExamine(canExamine);
-    }
     private ArrayList<String> canExamine;
     public void setCanExamine(ArrayList<String> canExamine) {
         this.canExamine = canExamine;

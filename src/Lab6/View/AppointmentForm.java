@@ -1,5 +1,7 @@
-package Lab5.View;
-import Lab5.Model.*;
+package Lab6.View;
+import Lab6.Model.*;
+import Lab6.Repository.Repository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -276,6 +278,7 @@ public class AppointmentForm extends BaseForm{
                     currApp.setResearch(researchComboBox.getSelectedItem().toString());
                     currApp.setConclusion(conclusionTextField.getText());
                 }
+                Repository.updateAppointment(currAppoint);
                 this.dispose();
             }
             else{
@@ -308,7 +311,6 @@ public class AppointmentForm extends BaseForm{
                 examinePanel.add(examineIsLabel);
             }
             allAppPanel.add(examinePanel);
-
         }
     }
     private boolean isAllSet() {

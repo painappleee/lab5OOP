@@ -1,7 +1,8 @@
 
-package Lab5.Model;
+package Lab6.Model;
 public class AppointmentOfDiagnostican extends Appointment {
-
+    private String research;
+    private String conclusion;
     public AppointmentOfDiagnostican(Doctor doctor, Patient patient, String date, String time){
         this.setDoctor(doctor);
         this.setPatient(patient);
@@ -9,8 +10,10 @@ public class AppointmentOfDiagnostican extends Appointment {
         this.setTime(time);
         this.setComplite(false);
     }
-    private String research;
-    private String conclusion;
+
+    public AppointmentOfDiagnostican(){
+
+    }
     public void setResearch(String research) {
         this.research = research;
     }

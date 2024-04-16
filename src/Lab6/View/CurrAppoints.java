@@ -1,9 +1,9 @@
-package Lab5.View;
+package Lab6.View;
 
-import Lab5.Repository.Repository;
-import Lab5.Model.Appointment;
-import Lab5.Model.Doctor;
-import Lab5.Model.Person;
+import Lab6.Repository.Repository;
+import Lab6.Model.Appointment;
+import Lab6.Model.Doctor;
+import Lab6.Model.Person;
 
 import javax.swing.*;
 import java.awt.*;

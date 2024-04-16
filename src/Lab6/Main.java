@@ -1,7 +1,14 @@
-package Lab5;
+package Lab6;
 
-import Lab5.Repository.Repository;
-import Lab5.View.Authorization;
+import Lab6.Model.*;
+import Lab6.Repository.Repository;
+import Lab6.View.Authorization;
+
+import javax.print.Doc;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Properties;
 
 public class Main {
     /*                 Доктора
@@ -15,5 +22,6 @@ public class Main {
 
         new Repository("Поликлинника №11");
         new Authorization();
+
     }
 }

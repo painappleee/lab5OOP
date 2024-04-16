@@ -1,14 +1,9 @@
-package Lab5.Model;
+package Lab6.Model;
 
 public abstract class Person {
     private String fullName;
-    private String login;
     private String password;
-    public Person(String fullName, String password){
-        setFullName(fullName);
-        setPassword(password);
-
-    }
+    private int id;
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -17,4 +12,10 @@ public abstract class Person {
     }
     public void setPassword(String password) { this.password = password;}
     public String getPassword() {return password; }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }

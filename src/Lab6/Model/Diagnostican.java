@@ -1,15 +1,9 @@
-package Lab5.Model;
+package Lab6.Model;
 import java.util.ArrayList;
 
 public class Diagnostican extends Doctor{
     private String typeResearch;
     private ArrayList<String> canResearch;
-    public Diagnostican(String fullName, String profession, String typeResearch, ArrayList<String> canResearch, String password){
-        super(fullName,password);
-        this.setProfession(profession);
-        this.setTypeResearch(typeResearch);
-        this.setCanResearch(canResearch);
-    }
     public void admitPatient(Appointment appointment,  ArrayList<String> writeToAppointment) {
         appointment.setComplite(true);
         AppointmentOfDiagnostican appointmentOfDiagnostican = (AppointmentOfDiagnostican)appointment;

@@ -1,7 +1,7 @@
-package Lab5.View;
+package Lab6.View;
 
-import Lab5.Repository.Repository;
-import Lab5.Model.Appointment;
+import Lab6.Repository.Repository;
+import Lab6.Model.Appointment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -86,7 +86,7 @@ public class DeleteAppoint extends BaseForm {
             }
         });
         del.addActionListener(e -> {
-            Repository.getAppointments().removeIf(x -> x.getPatient().equals(currAppoint.getPatient()) && x.getDate().equals(currAppoint.getDate()) && x.getTime().equals(currAppoint.getTime()));
+            Repository.deleteAppointment(currAppoint);
             this.dispose();
             lastForm.setEnabled(true);
         });
